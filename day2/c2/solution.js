@@ -1,30 +1,29 @@
 const fs = require('fs');
+// PART TWO SUM THE POWER
 
 try {
     const fileContent = fs.readFileSync('input.txt', 'utf-8');
     const data = fileContent.split('\n');
     const result = cubeConundrum(data);
-    console.log(result); // 3099
+    console.log(result);
 } catch (error) {
     console.error('Error reading the file:', error.message);
 } 
 
 function cubeConundrum(games) {
-    let sumOfIds = 0;
-    games.forEach((game, index) => {
-        if(isValidGame(game)) {
-            const id = index+1
-            sumOfIds +=id
-        }
+    let sumOfPower = 0;
+    games.forEach((game) => {
+            const power = powerOfSet(game)
+            sumOfPower += power
     });
-    return sumOfIds;
+    return sumOfPower;
 }
 
-function isValidGame(str) {
-    const totalCubes = {
-        red: 12,
-        green: 13,
-        blue: 14
+function powerOfSet(str) {
+    let totalCubes = {
+        red: 0,
+        green: 0,
+        blue: 0
     };
     const game = str.split(':')[1]
     const wordMatch = /(\w+)/g
@@ -32,10 +31,10 @@ function isValidGame(str) {
     for(let i = 1; i < amountAndColor.length; i+=2){
         const amount = parseInt(amountAndColor[i-1])
         const color = amountAndColor[i]
-        if(totalCubes[color] < amount) {
-            return false
+        if(totalCubes[color] < amount){
+            totalCubes[color] = amount;
         }
     }
-    return true
+    const power = totalCubes['red'] * totalCubes['green'] * totalCubes['blue']
+    return power
 }
-
