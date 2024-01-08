@@ -11,7 +11,7 @@ try {
     const fileContent = fs.readFileSync('input.txt', 'utf-8');
     const data = fileContent.split('\n');
     data.forEach(line => {
-        const result = trebuchet(line);
+        const result = trebuchet(String(line));
         console.log(result)
     });
 } catch (error) {
@@ -26,7 +26,6 @@ function trebuchet(str) {
     if (last.length > 1) last = String(spelledNums.indexOf(last) + 1);
 
     const concatNums = first + last;
-    console.log(concatNums)
     SUM += Number(concatNums);
     return SUM
 }
