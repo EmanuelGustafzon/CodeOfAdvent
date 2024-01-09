@@ -12,9 +12,7 @@ function inputTo2dArray() { // get the input values and return it as a 2d array
         data.forEach((line) => {
             const regex = /[A-Z]+/g;
             const matches = line.match(regex);
-            const resultString = matches.join(' ')
-            const resultArray = resultString.split(' ')
-            input2dArray.push(resultArray)
+            input2dArray.push(matches)
         });
     } catch (err) {
         console.log(err);
