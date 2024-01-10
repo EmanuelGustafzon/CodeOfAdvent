@@ -1,7 +1,6 @@
 const fs = require('fs');
 
-let totalWinnings = 0
-
+// arrays of hands sorted by type
 const five = []; 
 const four = [];
 const fullHouse = [];
@@ -10,7 +9,35 @@ const two = [];
 const one = [];
 const highCards = [];
 
-getInputAndSortByType()
+// this function read the txt and sort by type into the arrays above
+getInputAndSortByType();
+
+// I use divide and conquer teqnique to sort each array from weakest to strongest hand
+const sortFive = weakestToStrongestCards(five);
+const sortFour = weakestToStrongestCards(four);
+const sortFullHouse = weakestToStrongestCards(fullHouse);
+const sortThree = weakestToStrongestCards(three);
+const sortTwo = weakestToStrongestCards(two);
+const sortOne = weakestToStrongestCards(one);
+const sortHighCards = weakestToStrongestCards(highCards);
+
+// concat the array
+const sortedHands = [ ...sortHighCards, ...sortOne, ...sortTwo, ...sortThree,...sortFullHouse,...sortFour, ...sortFive ]
+
+// calculate the total winnigs by multiplying each bid with the rank
+const result = calcTotalWinnings()
+console.log(result)
+
+function calcTotalWinnings(){
+    totalWinnings = 0
+    let rank = 0
+for (const hand of sortedHands) {
+    rank++
+    const bid = hand[1]
+    totalWinnings += bid * rank
+}
+    return totalWinnings
+}
 
 function getInputAndSortByType(){
     try {
@@ -62,25 +89,6 @@ function getType(hand) {
     if(numOfDifferentCards === 4) return 1 //One pair
     if(numOfDifferentCards === 5) return 0 //High card
 }
-const sortFive = weakestToStrongestCards(five);
-const sortFour = weakestToStrongestCards(four);
-const sortFullHouse = weakestToStrongestCards(fullHouse);
-const sortThree = weakestToStrongestCards(three);
-const sortTwo = weakestToStrongestCards(two);
-const sortOne = weakestToStrongestCards(one);
-const sortHighCards = weakestToStrongestCards(highCards);
-
-const sortedHands = [ ...sortHighCards, ...sortOne, ...sortTwo, ...sortThree,...sortFullHouse,...sortFour, ...sortFive ]
-
-let rank = 0
-for (const hand of sortedHands) {
-    rank++
-    const bid = hand[1]
-    totalWinnings += bid * rank
-}
-
-console.log(totalWinnings)
-
 
 function weakestToStrongestCards(arr){
     if (arr.length <= 1) {
