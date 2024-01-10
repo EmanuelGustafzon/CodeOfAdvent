@@ -25,17 +25,16 @@ function extrapolate(arr, sum=0){
       } 
     const temp = []
     for(let i=1; i<arr.length; i++){
-      temp.push(Math.abs(arr[i] - arr[i - 1]));
+      temp.push((arr[i] - arr[i - 1]));
       }
     sum = arr[arr.length-1] + extrapolate(temp, sum)
     return sum
-
 }
 
 let total = 0
 
 for(const input of inputs){
-    const r =extrapolate(input)
-    total += r
+    const result = extrapolate(input)
+    total += result
 }
 console.log(total)
