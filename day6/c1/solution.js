@@ -4,8 +4,9 @@ const distances = [241,1549,1074,1091]
 // 1 ms -> 1 mm per ms
 // 2 ms -> 2 mm per ms 
 // total lenhth is eq to remaining time * mm/ms 
-const r = marginOfError()
-console.log(r)
+const result = marginOfError()
+console.log(result)
+
 function marginOfError() {
     let marginOfError = 1;
 

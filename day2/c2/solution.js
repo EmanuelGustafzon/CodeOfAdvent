@@ -4,8 +4,10 @@ const fs = require('fs');
 try {
     const fileContent = fs.readFileSync('input.txt', 'utf-8');
     const data = fileContent.split('\n');
+
     const result = cubeConundrum(data);
     console.log(result);
+
 } catch (error) {
     console.error('Error reading the file:', error.message);
 } 
@@ -20,6 +22,7 @@ function cubeConundrum(games) {
 }
 
 function powerOfSet(str) {
+    // find the time the elf get up the most amount of balls of one color
     let totalCubes = {
         red: 0,
         green: 0,

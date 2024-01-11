@@ -40,8 +40,8 @@ relations.forEach(([parent, left, right]) => {
     if(!network[right]){
     network[right] = new Node(right);
     } 
-    network[parent].left = left ? network[left] : null; 
-    network[parent].right = right ? network[right] : null; 
+    network[parent].left = network[left];
+    network[parent].right = network[right];
 });
 return network;
 }

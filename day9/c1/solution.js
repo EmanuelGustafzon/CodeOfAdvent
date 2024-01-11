@@ -1,7 +1,13 @@
 
 const fs = require('fs');
 
-function inputTo2dArray() { // get the input values and return it as a 2d array
+// inputs is a 2d array of the input values
+const inputs = inputTo2dArray()
+// sum values takes help from the extrapolate func to sum the extrapolated values of each array
+const result = sumValues(inputs)
+console.log(result)
+
+function inputTo2dArray() {
     const input2dArray = []
 
     try {
@@ -16,8 +22,15 @@ function inputTo2dArray() { // get the input values and return it as a 2d array
     return input2dArray
 }
 
-const inputs = inputTo2dArray()
+function sumValues(inputs) {
+  let total = 0
 
+  for(const input of inputs){
+      const result = extrapolate(input)
+      total += result
+  }
+  return total
+}
 
 function extrapolate(arr, sum=0){
     if(arr.every(item => item === 0)){
@@ -30,11 +43,3 @@ function extrapolate(arr, sum=0){
     sum = arr[arr.length-1] + extrapolate(temp, sum)
     return sum
 }
-
-let total = 0
-
-for(const input of inputs){
-    const result = extrapolate(input)
-    total += result
-}
-console.log(total)
